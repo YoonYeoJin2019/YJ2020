@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.MovieMapper">
+
+
+
+<insert id="skftlinsert" parameterType="MovieDTO">
+INSERT INTO SKFTL
+(
+SKFTL_NUM,
+TMEF,
+WF,
+TMN,
+TMX
+)VALUES(
+SKFTL_NUM.NEXTVAL,
+#{tmef},
+#{wf},
+#{tmn},
+#{tmx}
+)
+
+</insert>
+
+<select id="skftlselect" parameterType="MovieDTO">
+SELECT
+SKFTL_NUM,
+TMEF,
+WF,
+TMN,
+TMX
+FROM
+SKFTL
+</select>
+
+
+
+
+</mapper>
