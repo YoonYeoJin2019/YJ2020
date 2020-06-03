@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
+<beans 
+xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/jdbc
+          http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+             http://www.springframework.org/schema/data/mongo
+   http://www.springframework.org/schema/data/mongo/spring-mongo-2.2.xsd
+   http://www.springframework.org/schema/beans 
+   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+   ">
 	
 	  <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -15,6 +26,18 @@
         <property name="username" value="root" />
         <property name="password" value="1234" />
     </bean>
+    
+    <mongo:mongo-client host="192.168.42.141"
+port="27017" credentials="myUser:1234@hihi" id="mongo">
+</mongo:mongo-client>
+
+<mongo:db-factory dbname="hihi" mongo-ref="mongo" id="mongoDbFactory"/>
+
+<bean id="mongoTemplate" 
+class="org.springframework.data.mongodb.core.MongoTemplate">
+<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+
+</bean>
     
 </beans>
 
