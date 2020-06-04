@@ -1,0 +1,207 @@
+.c{
+    display: table;
+    width:100%;
+    border: 1px solid #bcbcbc;
+    padding-left:5px;
+}
+
+.b{
+    display:table-cell;
+    width:80%;
+    text-overflow:ellipsis; 
+    overflow:hidden;
+    white-space:nowrap;
+    color:black;
+    text-align: center;
+}
+.a{
+    display:table-cell;
+    width:20%;
+    text-overflow:ellipsis; 
+    overflow:hidden;
+    white-space:nowrap;
+    color:black;
+    text-align: center;
+}
+
+.d{
+
+    display:table-cell;
+    width:40%;
+    text-overflow:ellipsis; 
+    overflow:hidden;
+    white-space:nowrap;
+    color:black;
+    text-align: center;
+}
+
+.loginwindow{
+padding-top:5px;
+padding-bottom:5px;
+width:100%;
+text-align: center;
+background-color:#F6F6F6;
+}
+
+.loginwindowimg{
+    margin-top:40px;
+    margin-left:auto;
+    margin-right:auto;
+    border-bottom: 5px solid black;
+    margin-bottom: 40px;
+}
+
+.logininput1{
+    width:100%;
+    padding-left: 10px;
+}
+
+.logininput2{
+    width:100%;
+    padding-left: 10px;
+}
+
+.logininput3{
+    width:100%;
+    background-color: black;
+    color:white;
+    height: 60px;
+    font-weight:bold;
+}
+
+.logininputwin1{
+    margin-bottom: 50px;
+    margin-top: 20px;
+    width:50%;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;  
+}
+
+.loginfine1{
+color:black;
+font-size:17px;
+}
+
+.signup1{
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: left;
+    color:black;
+    margin-top:10px;
+}
+
+.signinput1{
+    width:100%;
+    padding-left: 10px;
+}
+
+.signup2{
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: left;
+    color:black;
+    margin-top:35px;
+    margin-bottom: 10px;
+    height: 80px;
+}
+
+
+
+.signupsubmit{
+    width:45%;
+    background-color: black;
+    color:white;
+    height: 60px;
+    font-weight:bold;
+    margin-left:5%;
+    float: left;
+}
+
+.signupsubmit2{
+    width:45%;
+    background-color: black;
+    color:white;
+    height: 60px;
+    font-weight:bold;
+    margin-right:5%;
+    float: left;
+}
+
+.index2submit{
+    width:110px;
+    background-color: black;
+    color:white;
+    height: 50px;
+    font-weight:bold;
+    margin-left:5%;
+    float: right;
+}
+
+.index2div{
+    width:60%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: left;
+    color:black;
+    margin-top:30px;
+    height: 60px;
+}
+
+.index2div2{
+    width:60%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: left;
+    color:black;
+    margin-top:20px;
+    height: 60px;
+}
+
+.creaname{
+color:black;
+margin-top:20px;
+font-size: 2.5rem;
+}
+
+.creaname2{
+    color:black;
+    margin-top:20px;
+  
+}
+
+.creanameinput{
+
+    width:60%;
+    padding-left: 10px;
+    color: #000;
+
+}
+
+.btn-file{
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+        right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.index2textarea{
+resize: none;
+width: 100%;
+}
+
