@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ILoginMapper">
+
+<insert id="signupsh" parameterType="LoginDTO">
+INSERT INTO 2020_YJ.USER_INFO
+(
+USER_NAME,
+USER_AUTH,
+USER_EMAIL,
+USER_STAT,
+USER_NICKNAME,
+USER_PASSWORD,
+USER_ID
+)VALUES(
+#{user_name},
+#{user_auth},
+#{user_email},
+#{user_stat},
+#{user_nickname},
+#{user_password},
+#{user_id}
+)
+</insert>
+
+<select id="loginsh"  parameterType="LoginDTO" resultType="LoginDTO">
+SELECT
+USER_NAME,
+USER_AUTH,
+USER_STAT,
+USER_NICKNAME
+FROM 2020_YJ.USER_INFO
+WHERE
+USER_ID
+=#{user_id}
+AND
+USER_PASSWORD
+=#{user_password}
+</select>
+
+
+</mapper>

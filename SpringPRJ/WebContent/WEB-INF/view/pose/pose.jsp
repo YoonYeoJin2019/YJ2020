@@ -48,9 +48,7 @@
             ctx = canvas.getContext("2d");
 
             labelContainer = document.getElementById("label-container1");
-            labelContainer.appendChild(document.createElement("div"));
-            
-            
+            labelContainer.appendChild(document.createElement("div"));     
         }
     
         async function loop(timestamp) {
@@ -76,18 +74,14 @@
     
             if(prediction[0].probability.toFixed(2) > 0.9){
 
-                if(status == "squat"){
-                    count++;
-                 
-                    
-                    
-                    
-                }
-
+                if(status == "down"){
+                    count++;               
+                }    
+                
                 status = "stand"
             }else if(prediction[1].probability.toFixed(2) == 1.00){
 
-                status = "squat"
+                status = "down"
             }
             
  

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+String user_nickname = (String) session.getAttribute("user_nickname");
+String user_auth = (String) session.getAttribute("user_auth");
+%>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -67,20 +73,20 @@
 	</head>
 	<body>
 	<div id="fh5co-page">
-		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-			<h1 id="fh5co-logo"><a href="index.html"><img src="images/logo3.png" alt="Free HTML5 Bootstrap Website Template"></a></h1>
-			<nav id="fh5co-main-menu" role="navigation">
-				<ul>
-					<li class="fh5co-active"><a href="index.html">HOME</a></li>
-					<li><a href="login.html">LOGIN</a></li>
-				</ul>
-			</nav>
+<%if(user_auth == null){ %>
 
+<%@include file="/WEB-INF/view/bar/user.jsp"%>
 
+<%}else if(user_auth.equals("0")){%>
 
-		</aside>
+<%@include file="/WEB-INF/view/bar/userlogin.jsp"%>
+
+<%}else{ %>
+
+<%@include file="/WEB-INF/view/bar/manager.jsp"%>
+
+<%}%>
 
 		<div id="fh5co-main">
 
@@ -222,14 +228,14 @@
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
 						<a href="work.html">
-							<img src="images/squat.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
+							<img src="/img/squat.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
 							<h3 class="fh5co-work-title">Squat</h3>
 							
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
 						<a href="work.html">
-							<img src="images/jump.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
+							<img src="/img/jump.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
 							<h3 class="fh5co-work-title">Jumping jacks</h3>
 							
 						</a>
@@ -237,7 +243,7 @@
 					<div class="clearfix visible-sm-block"></div>
 					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
 						<a href="work.html">
-							<img src="images/push.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
+							<img src="/img/push.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
 							<h3 class="fh5co-work-title">Push Up</h3>
 							
 						</a>

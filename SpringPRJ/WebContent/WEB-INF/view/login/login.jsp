@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+String user_nickname = (String) session.getAttribute("user_nickname");
+String user_auth = (String) session.getAttribute("user_auth");
+%>
+
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -67,20 +74,23 @@
 	</head>
 	<body>
 	<div id="fh5co-page">
-		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-			<h1 id="fh5co-logo"><a href="index.html"><img src="images/logo3.png" alt="Free HTML5 Bootstrap Website Template"></a></h1>
-			<nav id="fh5co-main-menu" role="navigation">
-				<ul>
-					<li><a href="index.html">HOME</a></li>
-					<li class="fh5co-active"><a href="portfolio.html">LOGIN</a></li>
-				</ul>
-			</nav>
+<%if(user_auth == null){ %>
+
+<%@include file="/WEB-INF/view/bar/user.jsp"%>
+
+<%}else if(user_auth.equals("0")){%>
+
+<%@include file="/WEB-INF/view/bar/userlogin.jsp"%>
+
+<%}else{ %>
+
+<%@include file="/WEB-INF/view/bar/manager.jsp"%>
+
+<%}%>
 
 
 
-		</aside>
 
 		<div id="fh5co-main">
 
@@ -94,17 +104,15 @@
 				<div class="loginwindow">
 
 
-                    <img class="loginwindowimg" src="images/logo3.png">
+                    <img class="loginwindowimg" src="/img/logo3.png">
 
-                <form>
-                    <div class="logininputwin1"><input type="text" class="logininput1"></div>
-                    <div class="logininputwin1"><input type="password" class="logininput2"></div>
+                <form action="loginsh.do" method="post">
+                    <div class="logininputwin1"><input type="text" class="logininput1" name="user_id"></div>
+                    <div class="logininputwin1"><input type="password" class="logininput2" name="user_password"></div>
                     <div class="logininputwin1"><input type="submit" class="logininput3" value="로그인"></div>
                 </form>
 
                 <div class="logininputwin1"><a class="loginfine1">아이디찾기</a> | <a class="loginfine1">비밀번호찾기</a> | <a class="loginfine1">회원가입</a></div>
-
-
 
                 </div>
             

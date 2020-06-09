@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+String user_nickname = (String) session.getAttribute("user_nickname");
+String user_auth = (String) session.getAttribute("user_auth");
+%>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -134,20 +140,19 @@ var immg2 = immg.split("\\");
 	</head>
 	<body>
 	<div id="fh5co-page">
-		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
+<%if(user_auth == null){ %>
 
-			<h1 id="fh5co-logo"><a href="index.html"><img src="/img/logo3.png" alt="Free HTML5 Bootstrap Website Template"></a></h1>
-			<nav id="fh5co-main-menu" role="navigation">
-				<ul>
-					<li class="fh5co-active"><a href="index.html">HOME</a></li>
-					<li><a href="login.html">LOGIN</a></li>
-				</ul>
-			</nav>
+<%@include file="/WEB-INF/view/bar/user.jsp"%>
 
+<%}else if(user_auth.equals("0")){%>
 
+<%@include file="/WEB-INF/view/bar/userlogin.jsp"%>
 
-		</aside>
+<%}else{ %>
+
+<%@include file="/WEB-INF/view/bar/manager.jsp"%>
+
+<%}%>
 
 		<div id="fh5co-main">
 
