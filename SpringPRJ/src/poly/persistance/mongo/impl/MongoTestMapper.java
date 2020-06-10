@@ -6,7 +6,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.Cursor;
+import com.mongodb.DBCollection;
 
+import poly.dto.LoginDTO;
 import poly.persistance.mongo.IMongoTestMapper;
 
 
@@ -36,7 +39,7 @@ import poly.persistance.mongo.IMongoTestMapper;
 				
 			}
 			
-			mongodb.createCollection(colNm).createIndex(new BasicDBObject("user_id",1), "testIdx");
+			mongodb.createCollection(colNm).createIndex(new BasicDBObject("user_id1",1), "testIdx1");
 			
 			res = true;
 			
@@ -46,6 +49,48 @@ import poly.persistance.mongo.IMongoTestMapper;
 			
 			return res;
 		}
+
+
+		@Override
+		public int insertdate(LoginDTO lDTO, String colNm) throws Exception {
+			
+			int res = 0;
+					
+			if(lDTO!=null) {
+				mongodb.insert(lDTO, colNm);
+				res = 1;
+			}
+				
+			return res;
+	
+		}
+
+
+		@Override
+		public int selectdata(String colNm, String user_nickname, String date_date) throws Exception {
+			// TODO Auto-generated method stub
+			
+	
+			
+			DBCollection rCol = mongodb.getCollection(colNm);
+			
+			BasicDBObject query = new BasicDBObject();
+			query.put("user_nickname", user_nickname);
+			BasicDBObject query2 = new BasicDBObject();
+			query2.put("date_date", date_date);
+			
+			int cursor = 0;
+			
+			cursor = rCol.find(query,query2).count();
+			
+			
+			System.out.println(cursor);
+			
+			return cursor;
+		}
+
+
+
 		
 		
 		

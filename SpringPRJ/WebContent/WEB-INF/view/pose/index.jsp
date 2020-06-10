@@ -90,6 +90,10 @@ String user_auth = (String) session.getAttribute("user_auth");
 
 		<div id="fh5co-main">
 
+<%if(user_auth == null){ %>
+
+
+<%}else{ %>
 
 			<div class="fh5co-counters" style="background-image: url(/img/hero.jpg);" data-stellar-background-ratio="0.5" id="counter-animate">
 				<div class="fh5co-narrow-content animate-box">
@@ -109,6 +113,10 @@ String user_auth = (String) session.getAttribute("user_auth");
 					</div>
 				</div>
 			</div>
+
+<%}%>
+
+
 		
 			<div class="fh5co-narrow-content" style="border-bottom: 10px solid gainsboro;border-top:10px solid gainsboro;padding-top:20px;margin-top: 20px;padding-bottom: 20px;">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 순위 </h2>
@@ -224,26 +232,36 @@ String user_auth = (String) session.getAttribute("user_auth");
 			</div>
 
 			<div class="fh5co-narrow-content" style="padding-top:20px;margin-top: 10px;">
-				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">운동 리스트 </h2>
+				<div class="index_div2">
+
+					<div class="index_div2_80"><h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">운동 리스트 </h2></div>
+					<div class="index_div2_20">	
+						<div class="index2div">
+						<input type="button" class="index2submit" value="운동등록" onclick="location.href='index_ready_1.do'">
+					</div>
+				</div>
+
+				</div>
+				
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<a href="work.html">
-							<img src="/img/squat.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
+						<a href="index_ready.do">
+							<img src="/img/squat.jpg" class="img-responsive" style="width: 100%;height:330px;">
 							<h3 class="fh5co-work-title">Squat</h3>
 							
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<a href="work.html">
-							<img src="/img/jump.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
+						<a href="index_ready.do">
+							<img src="/img/jump.jpg" class="img-responsive" style="width: 100%;height:330px;">
 							<h3 class="fh5co-work-title">Jumping jacks</h3>
 							
 						</a>
 					</div>
 					<div class="clearfix visible-sm-block"></div>
 					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<a href="work.html">
-							<img src="/img/push.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive" style="width: 100%;height:330px;">
+						<a href="index_ready.do">
+							<img src="/img/push.jpg" class="img-responsive" style="width: 100%;height:330px;">
 							<h3 class="fh5co-work-title">Push Up</h3>
 							
 						</a>

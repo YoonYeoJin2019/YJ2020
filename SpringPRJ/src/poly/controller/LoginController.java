@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import poly.dto.LoginDTO;
 import poly.service.ILoginService;
+import poly.service.IMongoTestService;
 import poly.util.CmmUtil;
+import poly.util.DateUtil;
 
 @Controller
 public class LoginController {
@@ -23,6 +25,10 @@ public class LoginController {
 	private ILoginService loginservice;
 	
 	
+	@Resource(name="MongoTestService")
+	private IMongoTestService mongoservice;
+	
+	
 	@RequestMapping(value="redirect")
 	public String Redirect(HttpServletRequest request,HttpServletResponse response) {
 	
@@ -30,21 +36,37 @@ public class LoginController {
 	}
 	
 	
-	
+	//로그인 페이지
 	@RequestMapping(value="login")
 	public String Login(HttpServletRequest request,HttpServletResponse response) {
 	
 	return "/login/login";
 	}
 	
+	//로그아웃
+	@RequestMapping(value="logout")
+	public String Logout(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
+	
+		
+		session.invalidate();
+		
+	return "pose/index";
+	}
+	
+	
+	//로그인 실행
 	@RequestMapping(value="loginsh")
 	public String Loginsh(HttpServletRequest request,HttpServletResponse response,Model model,HttpSession session) {
 	
 		String user_id = CmmUtil.nvl(request.getParameter("user_id"));
 		String user_password = CmmUtil.nvl(request.getParameter("user_password"));
+		String user_nickname = "";
+			
+		String date_date = DateUtil.getDateTime("yyyy-MM-dd");
 		
+		//lDTO.setDate_date(date_date);
 		
-		
+		int res = 0;
 		
 		
 		
@@ -59,7 +81,7 @@ public class LoginController {
 			
 			lDTO = loginservice.loginsh(lDTO);
 				
-					
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -79,8 +101,26 @@ public class LoginController {
 			session.setAttribute("user_nickname", lDTO.getUser_nickname());
 			session.setAttribute("user_auth", lDTO.getUser_auth());
 			
+			user_nickname = lDTO.getUser_nickname();
+			
+			lDTO = null;
+			
+			lDTO = new LoginDTO();
+			
+			lDTO.setUser_nickname(user_nickname);
+			lDTO.setDate_date(date_date);
+			
+			try {
+				
+				res = mongoservice.logindata(lDTO);
+						
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 			
 			
+
+			lDTO = null;
 			
 			return "pose/index";
 		}
@@ -145,6 +185,8 @@ public class LoginController {
 			model.addAttribute("url","/signup.do" );
 			
 		}
+		
+		lDTO = null;
 		
 		return "redirect";
 	}

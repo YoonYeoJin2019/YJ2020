@@ -95,7 +95,7 @@ String user_auth = (String) session.getAttribute("user_auth");
 
 					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 						<figure class="text-center">
-							<img src="/img/work.jpg" alt="Free HTML5 Bootstrap" class="img-responsive" style="max-width: 80%; margin-left:auto;margin-right:auto" >
+							<img src="/img/work.jpg" class="img-responsive" style="max-width: 60%; margin-left:auto;margin-right:auto" >
 						</figure>
 					</div>
 					

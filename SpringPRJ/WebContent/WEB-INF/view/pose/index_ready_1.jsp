@@ -91,6 +91,7 @@ var immg2 = immg.split("\\");
                 $('#blah').attr('src', e.target.result);
             }
             $("#imgName").html(immg2[2]);
+            document.getElementById("img_name").value = immg2[2];
 
           reader.readAsDataURL(input.files[0]);
         }
@@ -111,7 +112,9 @@ var immg2 = immg.split("\\");
         
 
         $("#fileName").html(ffile2[2]);
+        document.getElementById("file_name").value = ffile2[2];
 
+        
     }
 </script>
 
@@ -129,7 +132,7 @@ var immg2 = immg.split("\\");
         
 
         $("#fileName2").html(ffile4[2]);
-
+        document.getElementById("file_name2").value = ffile4[2];
     }
 </script>
 
@@ -159,6 +162,12 @@ var immg2 = immg.split("\\");
 			<div class="fh5co-narrow-content" style="border-bottom: 10px solid gainsboro;border-top:10px solid gainsboro;padding-top:20px;margin-top: 20px;padding-bottom: 20px;">
                 <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 운동등록 </h2>
 
+
+
+  <!--form 시작-->
+  
+  <form action="index_ready_1_sh.do" method="post" enctype="multipart/form-data">
+  
 			<div class="fh5co-narrow-content" style="padding: 0;">
 				<div class="row" style="margin-top: 0;">
 					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
@@ -172,7 +181,7 @@ var immg2 = immg.split("\\");
                     <input type="file" id="imgInp" name="imgInp"/>
                         </span>
                 </div>
-                <div class="creaname" id="imgName"  name="imgName">
+                <div class="creaname" id="imgName" name="imgName">
                   
                 </div>
 
@@ -180,7 +189,10 @@ var immg2 = immg.split("\\");
                 운동이름
                 </div>
                 <div class="creaname">
-                    <input type="text" class="creanameinput">
+                    <input type="text" class="creanameinput" name="pose_name">
+                    <input type="hidden" name="img_name" value="" id="img_name">
+                    <input type="hidden" name="file_name" value="" id="file_name">
+                    <input type="hidden" name="file_name2" value="" id="file_name2">
                 </div>
 
                 <div class="creaname2">
@@ -213,6 +225,11 @@ var immg2 = immg.split("\\");
 
                     </div>
 				</div>
+</form>
+     <!--form 끝-->
+
+
+
 
                 <div>
 

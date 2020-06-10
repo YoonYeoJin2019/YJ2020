@@ -101,7 +101,7 @@ String user_auth = (String) session.getAttribute("user_auth");
 				<div class="loginwindow">
 
 
-                    <img class="loginwindowimg" src="images/logo3.png">
+                    <img class="loginwindowimg" src="/img/logo3.png">
 
                 <form>
                     <div class="signup1">이름</div>
@@ -117,7 +117,7 @@ String user_auth = (String) session.getAttribute("user_auth");
                     </div>
                 </form>
 
-                <div class="logininputwin1"><a class="loginfine1">아이디찾기</a> | <a class="loginfine1">비밀번호찾기</a> | <a class="loginfine1">회원가입</a></div>
+                 <div class="logininputwin1"><a class="loginfine1" href="loginfind.do">아이디찾기</a> | <a class="loginfine1" href="passfind.do">비밀번호찾기</a> | <a class="loginfine1" href="signup.do">회원가입</a></div>
 
 
 

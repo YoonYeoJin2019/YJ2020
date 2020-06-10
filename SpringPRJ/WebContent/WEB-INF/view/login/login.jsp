@@ -112,7 +112,7 @@ String user_auth = (String) session.getAttribute("user_auth");
                     <div class="logininputwin1"><input type="submit" class="logininput3" value="로그인"></div>
                 </form>
 
-                <div class="logininputwin1"><a class="loginfine1">아이디찾기</a> | <a class="loginfine1">비밀번호찾기</a> | <a class="loginfine1">회원가입</a></div>
+                <div class="logininputwin1"><a class="loginfine1" href="loginfind.do">아이디찾기</a> | <a class="loginfine1" href="passfind.do">비밀번호찾기</a> | <a class="loginfine1" href="signup.do">회원가입</a></div>
 
                 </div>
             

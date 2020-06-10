@@ -10,8 +10,16 @@ public class LoginDTO {
 	private String user_nickname;
 	private String user_password;
 	private String user_id;
+	private String date_date;
 	
 	
+	
+	public String getDate_date() {
+		return date_date;
+	}
+	public void setDate_date(String date_date) {
+		this.date_date = date_date;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

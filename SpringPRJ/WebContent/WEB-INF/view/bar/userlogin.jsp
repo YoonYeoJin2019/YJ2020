@@ -9,7 +9,7 @@
 				<ul>
 					<li><a href="index.do">HOME</a></li>
 					
-					<li><a href="loginout.do">LOGOUT</a></li>
+					<li><a href="logout.do">LOGOUT</a></li>
 					
 					<li><a href="record.do">RECORD</a></li>
 					

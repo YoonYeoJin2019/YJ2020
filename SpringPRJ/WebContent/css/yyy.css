@@ -205,3 +205,18 @@ resize: none;
 width: 100%;
 }
 
+.index_div2{
+
+    width: 100%;
+    height: 100px;
+}
+
+.index_div2_80{
+width: 80%;
+float: left;
+
+}
+.index_div2_20{
+    width: 20%;
+    float: left;
+}

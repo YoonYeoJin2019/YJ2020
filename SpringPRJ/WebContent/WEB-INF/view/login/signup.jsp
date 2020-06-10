@@ -115,7 +115,7 @@ String user_auth = (String) session.getAttribute("user_auth");
                     <div class="signup1"><input type="email" class="signinput1" name="user_email"></div>
                   
                     <div class="signup2">
-                        <input type="button" class="signupsubmit2" value="취소">
+                        <input type="button" class="signupsubmit2" value="취소" onclick="location.href='login.do'">
                         <input type="submit" class="signupsubmit" value="가입">
                     </div>
                     
