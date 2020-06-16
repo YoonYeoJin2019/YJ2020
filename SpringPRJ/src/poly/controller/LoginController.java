@@ -11,10 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import poly.dto.LoginDTO;
+import poly.dto.MailDTO;
 import poly.service.ILoginService;
+import poly.service.IMailService;
 import poly.service.IMongoTestService;
 import poly.util.CmmUtil;
 import poly.util.DateUtil;
+import poly.util.EncryptUtil;
 
 @Controller
 public class LoginController {
@@ -23,6 +26,10 @@ public class LoginController {
 	
 	@Resource(name="LoginService")
 	private ILoginService loginservice;
+	
+	
+	@Resource(name="MailService")
+	private IMailService mailService;
 	
 	
 	@Resource(name="MongoTestService")
@@ -191,10 +198,6 @@ public class LoginController {
 		return "redirect";
 	}
 	
-	
-	
-	
-	
 	@RequestMapping(value="passfind")
 	public String Passfind(HttpServletRequest request,HttpServletResponse response) {
 	
@@ -206,4 +209,127 @@ public class LoginController {
 	
 	return "/login/loginfind";
 	}
+	
+	@RequestMapping(value="loginfindsh")
+	public String Loginfindsh(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception {
+		
+		String user_name = request.getParameter("user_name");
+		String user_email = request.getParameter("user_email");
+
+		log.info(user_name+"이름");
+		log.info(user_email+"메일");
+		
+		LoginDTO lDTO = new LoginDTO(); // 보내는 통
+	
+		log.info(user_name+"이름");
+		log.info(user_email+"메일");
+		
+		try {
+			
+			lDTO.setUser_name(user_name);
+			lDTO.setUser_email(EncryptUtil.encAES128CBC(user_email));
+		
+			lDTO = loginservice.idfindsh(lDTO);
+						
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		if (lDTO == null) {
+			model.addAttribute("msg", "가입된 아이디가 없습니다.");
+			model.addAttribute("url", "/loginfind.do");
+		} else {
+			model.addAttribute("msg", "가입된 아이디는 " + lDTO.getUser_id() + " 입니다.");
+			model.addAttribute("url", "/login.do");
+		}
+		
+	return "redirect";
+	}
+	
+	@RequestMapping(value="passfindsh")
+	public String Passfindsh(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception {
+	
+		String user_id = CmmUtil.nvl(request.getParameter("user_id"));
+		String user_name = CmmUtil.nvl(request.getParameter("user_name"));
+		String user_email = CmmUtil.nvl(EncryptUtil.encAES128CBC(request.getParameter("user_email")));
+		
+		log.info(user_name+"이름");
+		log.info(user_email+"메일");
+		log.info(user_id+"아이디");
+		
+		String msg="";
+		String title="움직여 임시 비밀번호입니다.";
+		String mail = CmmUtil.nvl(request.getParameter("user_email"));
+			
+		int result2 = 0;
+		int result = 0;
+		LoginDTO lDTO = new LoginDTO(); // 보내는 통
+		MailDTO mDTO = new MailDTO();
+		
+		try {
+				
+			
+			lDTO.setUser_id(user_id);
+			lDTO.setUser_name(user_name);
+			lDTO.setUser_email(user_email);
+			
+			
+			lDTO = loginservice.passfindsh(lDTO);
+			
+			if(lDTO != null) {
+				String user_password = EncryptUtil.getNewPw();
+				
+				lDTO.setUser_password(EncryptUtil.encHashSHA256(user_password));
+				
+				result2 = loginservice.upPW(lDTO);
+				
+				if(result2>0) {	
+					
+					msg+="안녕하세요 움직여입니다. 임시 비밀번호는 "+user_password+" 입니다";
+	
+					
+					log.info(msg+"컨트롤러 메세지");
+					log.info(title+"컨트롤러 제목");
+					log.info(mail+"컨트롤러 받는사람");
+					
+					mDTO.setTitle(title);
+					mDTO.setToMail(mail);
+					mDTO.setContents(msg);
+					
+					result = mailService.doSendMail(mDTO);
+					
+					if(result>0) {
+						model.addAttribute("msg","임시 비밀번호가 해당 이메일로 발송되었습니다.");
+						model.addAttribute("url","/login.do");
+					}else {
+						model.addAttribute("msg","임시 비밀번호 발송에 실패하였습니다");
+						model.addAttribute("url","/passfind.do");
+					}
+	
+				}else {
+					model.addAttribute("msg","임시 비밀번호 발송에 실패하였습니다");
+					model.addAttribute("url","/passfind.do");
+				}		
+			}else {
+				
+				model.addAttribute("msg", "입력 정보를 다시 한번 확인해주세요");
+				model.addAttribute("url", "/passfind.do");
+					
+			}
+			
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	return "redirect";
+	}
+	
+	
+	
+	
 }

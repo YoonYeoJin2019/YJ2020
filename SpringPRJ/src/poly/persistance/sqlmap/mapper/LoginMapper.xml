@@ -39,5 +39,46 @@ USER_PASSWORD
 =#{user_password}
 </select>
 
+<select id="idfindsh"  parameterType="LoginDTO" resultType="LoginDTO">
+SELECT
+USER_ID
+FROM 2020_YJ.USER_INFO
+WHERE
+USER_EMAIL
+=#{user_email}
+AND
+USER_NAME
+=#{user_name}
+</select>
+
+
+
+<select id="passfindsh"  parameterType="LoginDTO" resultType="LoginDTO">
+SELECT
+USER_ID
+FROM 2020_YJ.USER_INFO
+WHERE
+USER_ID
+=#{user_id}
+AND
+USER_EMAIL
+=#{user_email}
+AND
+USER_NAME
+=#{user_name}
+</select>
+
+<update id="upPW" parameterType="LoginDTO">
+UPDATE
+2020_YJ.USER_INFO
+SET
+USER_PASSWORD
+=#{user_password}
+WHERE
+USER_ID
+=#{user_id}
+</update>
+
+
 
 </mapper>

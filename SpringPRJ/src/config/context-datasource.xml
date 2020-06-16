@@ -27,7 +27,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         <property name="password" value="1234" />
     </bean>
     
-    <mongo:mongo-client host="192.168.42.141"
+    <mongo:mongo-client host="192.168.42.142"
 port="27017" credentials="myUser:1234@hihi" id="mongo">
 </mongo:mongo-client>
 

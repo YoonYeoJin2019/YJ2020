@@ -43,6 +43,24 @@ public class LoginService implements ILoginService {
 		
 		return loginmapper.loginsh(lDTO);
 	}
+
+	@Override
+	public LoginDTO idfindsh(LoginDTO lDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.idfindsh(lDTO);
+	}
+
+	@Override
+	public LoginDTO passfindsh(LoginDTO lDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.passfindsh(lDTO);
+	}
+
+	@Override
+	public int upPW(LoginDTO lDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.upPW(lDTO);
+	}
 	
 	
 }

@@ -8,4 +8,10 @@ public interface ILoginService {
 
 	LoginDTO loginsh(LoginDTO lDTO)throws Exception;
 
+	LoginDTO idfindsh(LoginDTO lDTO)throws Exception;
+
+	LoginDTO passfindsh(LoginDTO lDTO)throws Exception;
+
+	int upPW(LoginDTO lDTO)throws Exception;
+
 }

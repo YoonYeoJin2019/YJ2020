@@ -9,7 +9,8 @@
 <body>
 
     <div style="display:none">Teachable Machine Pose Model</div>
-    <button type="button" onclick="init()">Start</button>
+
+    
     <div><canvas id="canvas"></canvas></div>
     <div id="label-container1">하이</div>
     
@@ -24,7 +25,10 @@
         const URL = "./my_model/";
         let model, webcam, ctx, labelContainer, maxPredictions;
     
-        async function init() {
+       //  async function init() {
+    	   
+    	    window.onload = async function(){
+    	   
             const modelURL = URL + "model1.json";
             const metadataURL = URL + "metadata1.json";
     

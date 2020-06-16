@@ -8,9 +8,13 @@ import org.springframework.stereotype.Component;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 
+import poly.dto.ExplainDTO;
+import poly.dto.HealthDTO;
 import poly.dto.LoginDTO;
 import poly.persistance.mongo.IMongoTestMapper;
+import poly.util.CmmUtil;
 
 
 	
@@ -76,12 +80,13 @@ import poly.persistance.mongo.IMongoTestMapper;
 			
 			BasicDBObject query = new BasicDBObject();
 			query.put("user_nickname", user_nickname);
-			BasicDBObject query2 = new BasicDBObject();
-			query2.put("date_date", date_date);
+			query.put("date_date", date_date);
+			
+			log.info(date_date);
 			
 			int cursor = 0;
 			
-			cursor = rCol.find(query,query2).count();
+			cursor = rCol.find(query).count();
 			
 			
 			System.out.println(cursor);
@@ -90,6 +95,86 @@ import poly.persistance.mongo.IMongoTestMapper;
 		}
 
 
+		@Override
+		public int inserthealth1(HealthDTO hDTO, String colNm) throws Exception {
+			// TODO Auto-generated method stub		
+			int res = 0;
+			
+			if(hDTO!=null) {
+				mongodb.insert(hDTO, colNm);
+				res = 1;
+			}
+				
+			return res;
+		}
+
+
+		@Override
+		public int selecthealth1(String colNm) throws Exception {
+			
+			DBCollection rCol = mongodb.getCollection(colNm);
+			int cursor = 0;
+			cursor = rCol.find().count();
+			
+			return cursor;
+		}
+
+		@Override
+		public int selecthealth2(String colNm) throws Exception {
+			
+			DBCollection rCol = mongodb.getCollection(colNm);
+			int cursor = 0;
+			cursor = rCol.find().count();
+			
+			return cursor;
+		}
+
+
+		@Override
+		public int inserthealth2(ExplainDTO eDTO, String colNm) throws Exception {
+			
+			int res = 0;
+			
+			if(eDTO!=null) {
+				mongodb.insert(eDTO, colNm);
+				res = 1;
+			}
+				
+			return res;
+		}
+
+
+		@Override
+		public HealthDTO selecthealth3(String pose_name) throws Exception {
+			
+			HealthDTO hDTO = null;
+			String colNm = "HEALTH_INFO";
+			
+			DBCollection rCol = mongodb.getCollection(colNm);
+			
+			BasicDBObject query = new BasicDBObject();
+			query.put("pose_name", pose_name);
+			
+			Cursor cursor = rCol.find(query);
+			
+			while(cursor.hasNext()) {
+				
+				hDTO = new HealthDTO();
+				
+				final DBObject current = cursor.next();
+				
+				String health_no = CmmUtil.nvl((String) current.get("health_no"));
+			
+				hDTO.setHealth_no(health_no);
+				
+			}
+
+			
+			
+
+			
+			return hDTO;
+		}
 
 		
 		

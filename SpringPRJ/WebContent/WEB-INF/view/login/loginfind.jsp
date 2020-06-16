@@ -105,7 +105,7 @@ String user_auth = (String) session.getAttribute("user_auth");
 
                     <img class="loginwindowimg" src="/img/logo3.png">
 
-                <form action="/loginfind.do" method="POST">
+                <form action="/loginfindsh.do" method="POST">
                     <div class="signup1">이름</div>
                     <div class="signup1"><input type="text" class="signinput1" name="user_name"></div>
                     <div class="signup1">이메일</div>

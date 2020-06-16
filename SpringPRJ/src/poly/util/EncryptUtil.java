@@ -87,5 +87,27 @@ public class EncryptUtil {
 			}
 	
 			
+		public static String getNewPw() throws Exception {
+			// 비밀번호 배열을 생성
+			char[] charSet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+					's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+			// 비밀번호를 받기 위한 문자열 버퍼 생성
+			// 비밀번호를 담는 틀 생성
+			StringBuffer newKey = new StringBuffer();
+
+			// 10번 반복
+			for (int i = 0; i < 10; i++) {
+				// 비밀번호 배열 길이*랜덤으로 생성된 숫자
+				// random() 난수가 복잡하지 않기 떄문에 숫자를 더 복잡하게 해줌
+				int idx = (int) (charSet.length * Math.random());
+				// 문자열에다가 한글자씩 담는것
+				newKey.append(charSet[idx]);
+			}
+
+			// 스트링 버퍼를 스트링형태로 바꿔서 반환해줌
+			return newKey.toString();
+		}
+		
 	
 }

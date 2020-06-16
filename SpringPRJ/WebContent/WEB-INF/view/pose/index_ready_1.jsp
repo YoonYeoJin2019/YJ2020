@@ -238,7 +238,7 @@ var immg2 = immg.split("\\");
             </div>
             
 
-        </div>>
+        </div>
 
 
 		

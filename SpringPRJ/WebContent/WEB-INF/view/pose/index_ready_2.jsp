@@ -5,6 +5,8 @@
 <%
 String user_nickname = (String) session.getAttribute("user_nickname");
 String user_auth = (String) session.getAttribute("user_auth");
+String pose_name = (String) request.getAttribute("pose_name");
+String health_no = (String) request.getAttribute("health_no");
 %>
 
 <html>
@@ -73,6 +75,12 @@ String user_auth = (String) session.getAttribute("user_auth");
 	<![endif]-->
 
 <script type="text/javascript">
+	$(window).on("load",function(){
+		var pose_name = '<%=pose_name%>';
+		console.log(pose_name);
+		var health_no = '<%=health_no%>';
+		console.log(health_no);
+	})
     $(function() {
         $("#imgInp").on('change', function(){
             readURL(this);
@@ -90,68 +98,11 @@ var immg2 = immg.split("\\");
                 $('#blah').attr('src', e.target.result);
             }
             $("#imgName").html(immg2[2]);
+            document.getElementById("img_name").value = immg2[2];
 
           reader.readAsDataURL(input.files[0]);
         }
     }
-</script>
-
-<script type="text/javascript">
-    $(function() {
-        $("#fileInp").on('change', function(){
-            readURL2(this);
-        });
-    });
-
-    function readURL2(input) {
-        var reader = new FileReader();
-        var ffile = document.getElementById('fileInp').value
-        var ffile2 = ffile.split("\\");
-        
-
-        $("#fileName").html(ffile2[2]);
-
-    }
-</script>
-
-<script type="text/javascript">
-    $(function() {
-        $("#fileInp2").on('change', function(){
-            readURL3(this);
-        });
-    });
-
-    function readURL3(input) {
-        var reader = new FileReader();
-        var ffile3 = document.getElementById('fileInp2').value
-        var ffile4 = ffile3.split("\\");
-        
-
-        $("#fileName2").html(ffile4[2]);
-
-    }
-</script>
-
-
-<script type='text/javaScript'>
-    // textarea 줄바꿈 제한
-    var str = $("#aaaa").val();
-
-var str_arr = str.split("\n");  // 줄바꿈 기준으로 나눔 
-
-var row = str_arr.length;  // row = 줄 수 
-
-if(row >10){
-
-//마지막 입력문자 삭제
-
-alert("10줄 이상 입력할 수 없습니다.")
-
-var lastChar = str.slice(0,-1); //열 
-
-$("#aaaa").val(lastChar)
-}
-}
 </script>
 
 
@@ -177,6 +128,8 @@ $("#aaaa").val(lastChar)
 			<div class="fh5co-narrow-content" style="border-bottom: 10px solid gainsboro;border-top:10px solid gainsboro;padding-top:20px;margin-top: 20px;padding-bottom: 20px;">
                 <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 운동등록2 </h2>
 
+<!--폼시작-->
+<form action="index_ready_2_sh.do" method="post" enctype="multipart/form-data" >
 			<div class="fh5co-narrow-content" style="padding: 0;">
 				<div class="row" style="margin-top: 0;">
 					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
@@ -196,20 +149,25 @@ $("#aaaa").val(lastChar)
 
                 
                 <div class="creaname">
-                운동 설명
+                <%=pose_name%>  <%=health_no%>- 운동 설명
                 </div>
                 <div style="width:100%;" class="creaname">
-                <textarea class="index2textarea" rows="5" name="textarea" id="textarea"></textarea>
+                <textarea class="index2textarea" rows="5" name="EXPLAIN_CONTENT" id="EXPLAIN_CONTENT"></textarea>
                 </div>
 
-
+				<input type="hidden" name="img_name" value="" id="img_name">
+				<input type="hidden" name="pose_name" value="<%=pose_name%>" id="pose_name">
+				<input type="hidden" name="health_no" value="<%=health_no%>" id="health_no">
 					<div class="index2div2">
                         <input type="submit" class="index2submit" value="등록">
-                        <input type="submit" class="index2submit" value="취소">
+                        <input type="button" class="index2submit" value="취소" onclick="location.href='index.do'">
                     </div>
 
                     </div>
 				</div>
+</form>
+<!--폼 끝-->
+
 
                 <div>
 

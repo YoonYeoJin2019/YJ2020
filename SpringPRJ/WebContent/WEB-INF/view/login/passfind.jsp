@@ -103,13 +103,13 @@ String user_auth = (String) session.getAttribute("user_auth");
 
                     <img class="loginwindowimg" src="/img/logo3.png">
 
-                <form>
+                <form method="POST" action="/passfindsh.do">
                     <div class="signup1">이름</div>
-                    <div class="signup1"><input type="text" class="signinput1"></div>
+                    <div class="signup1"><input type="text" class="signinput1" name="user_name"></div>
                     <div class="signup1">이메일</div>
-                    <div class="signup1"><input type="email" class="signinput1"></div>
+                    <div class="signup1"><input type="email" class="signinput1" name="user_email"></div>
                     <div class="signup1">아이디</div>
-                    <div class="signup1"><input type="text" class="signinput1"></div>
+                    <div class="signup1"><input type="text" class="signinput1" name="user_id"></div>
 
                     <div class="signup2">
                         <input type="button" class="signupsubmit2" value="취소">
