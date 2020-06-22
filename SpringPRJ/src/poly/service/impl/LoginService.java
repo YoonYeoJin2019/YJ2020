@@ -61,6 +61,24 @@ public class LoginService implements ILoginService {
 		// TODO Auto-generated method stub
 		return loginmapper.upPW(lDTO);
 	}
+
+	@Override
+	public LoginDTO getuserinfo(String user_nickname) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.getuserinfo(user_nickname);
+	}
+
+	@Override
+	public int passCheck(String user_password2) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.passCheck(user_password2);
+	}
+
+	@Override
+	public int updatepass(LoginDTO lDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.updatepass(lDTO);
+	}
 	
 	
 }

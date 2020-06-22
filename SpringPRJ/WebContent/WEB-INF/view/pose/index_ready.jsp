@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@page import="poly.dto.ExplainDTO" %>
 <!DOCTYPE html>
 
 <%
 String user_nickname = (String) session.getAttribute("user_nickname");
 String user_auth = (String) session.getAttribute("user_auth");
+ExplainDTO eDTO = (ExplainDTO) request.getAttribute("eDTO");
+String health_name = (String) request.getAttribute("health_name");
+
 %>
 
 <html>
@@ -50,18 +55,18 @@ String user_auth = (String) session.getAttribute("user_auth");
 	
 
 
-	<link rel="stylesheet" href="/css/yyy.css">
+	<link rel="stylesheet" href="/css/yyy.css?after">
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/animate.css?after">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="/css/icomoon.css">
+	<link rel="stylesheet" href="/css/icomoon.css?after">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/bootstrap.css?after">
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/css/owl.carousel.min.css?after">
+	<link rel="stylesheet" href="/css/owl.theme.default.min.css?after">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css?after">
 	
 
 	<!-- Modernizr JS -->
@@ -95,15 +100,15 @@ String user_auth = (String) session.getAttribute("user_auth");
 
 					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 						<figure class="text-center">
-							<img src="/img/work.jpg" class="img-responsive" style="max-width: 60%; margin-left:auto;margin-right:auto" >
+							<img src="/pose/<%=eDTO.getHealth_no()%>/to/<%=eDTO.getExplain_img()%>" class="img-responsive" style="max-width: 60%;max-height:500px; margin-left:auto;margin-right:auto" >
 						</figure>
 					</div>
 					
 					<div style="text-align: center;">
 						
 						
-							<h1>Push up</h1>
-							<p>푸쉬업을 합니덩</p>
+							<h1><%=health_name%></h1>
+							<p><%=eDTO.getExplain_content()%></p>
                 
                             
                     </div>
@@ -113,12 +118,12 @@ String user_auth = (String) session.getAttribute("user_auth");
 					
 					<div class="index2div">
 						<input type="submit" class="index2submit" value="시작">
-						<input type="button" class="index2submit" value="홈으로">
+						<input type="button" class="index2submit" value="홈으로" onclick="location.href='/index.do'">
 					</div>
 					
 					<div class="index2div2">
-						<input type="button" class="index2submit" value="삭제">
-						<input type="button" class="index2submit" value="수정">
+						<input type="button" class="index2submit" value="삭제" onclick="location.href='/index_ready_del.do?health_no=<%=eDTO.getHealth_no()%>'">
+						<input type="button" class="index2submit" value="수정" onclick="location.href='/index_ready_1_up.do?health_no=<%=eDTO.getHealth_no()%>'">
                     </div>
 
                     </div>

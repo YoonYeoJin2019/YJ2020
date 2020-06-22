@@ -39,6 +39,8 @@
 padding-top:5px;
 padding-bottom:5px;
 width:100%;
+padding-left:25%;
+padding-right: 25%;
 text-align: center;
 background-color:#F6F6F6;
 }
@@ -72,7 +74,7 @@ background-color:#F6F6F6;
 .logininputwin1{
     margin-bottom: 50px;
     margin-top: 20px;
-    width:50%;
+    width:100%;
     text-align: center;
     margin-left:auto;
     margin-right:auto;  
@@ -84,21 +86,24 @@ font-size:17px;
 }
 
 .signup1{
-    width:50%;
+    width:100%;
     margin-left:auto;
     margin-right:auto;
     text-align: left;
     color:black;
     margin-top:10px;
+    font-weight: bold;
+
 }
 
 .signinput1{
     width:100%;
     padding-left: 10px;
+    box-sizing: border-box;
 }
 
 .signup2{
-    width:50%;
+    width:100%;
     margin-left:auto;
     margin-right:auto;
     text-align: left;
@@ -219,4 +224,113 @@ float: left;
 .index_div2_20{
     width: 20%;
     float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.setting_div_in{
+    width:100%;
+    padding-left: 10px;
+    background-color: white;
+    height: 40px;
+    border:1px black solid;
+    padding-top:5px;
+    box-sizing: border-box;
+}
+
+
+
+.setting1{
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: left;
+    color:black;
+    margin-top:10px;
+    font-weight: bold;
+}
+
+
+.settingsubmit2{
+    width:45%;
+    background-color: black;
+    color:white;
+    height: 60px;
+    font-weight:bold;
+    margin-right:5%;
+    float: left;
+    font-size: 1.5rem;
+}
+
+.settingsubmit{
+    width:45%;
+    background-color: black;
+    color:white;
+    height: 60px;
+    font-weight:bold;
+    margin-left:5%;
+    float: left;
+    font-size: 1.5rem;
+}
+
+
+
+
+
+@media screen and (max-width: 650px) {
+
+    .setting1{
+width: 98%;
+margin-left: 1%;
+margin-right: 1%;
+    }
+
+    .signup1{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .signup2{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+    .logininputwin1{
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+
+.loginwindow{
+    padding-top:5px;
+    padding-bottom:5px;
+    width:100%;
+    padding-left:0%;
+    padding-right: 0%;
+    text-align: center;
+    background-color:#F6F6F6;
+    }
+
+
+}
+@media screen and (max-width: 450px) {
+.index2div2{
+    width: 100%;
+}
+.creaname{
+    padding-left:1%;
+    padding-right: 1%;
+}
+
 }

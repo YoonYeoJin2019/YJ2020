@@ -53,6 +53,11 @@
 <version>5.1.44</version>
 </dependency>
 
+<dependency>
+    <groupId>org.codehaus.jackson</groupId>
+    <artifactId>jackson-mapper-asl</artifactId>
+    <version>1.9.13</version>
+</dependency>
 
 <!-- redis value 를 json 형태로 표현하기 위해 추가 -->
 <dependency>

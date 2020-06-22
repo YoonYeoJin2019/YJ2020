@@ -79,6 +79,40 @@ USER_ID
 =#{user_id}
 </update>
 
+<select id="getuserinfo"  parameterType="LoginDTO" resultType="LoginDTO">
+SELECT
+USER_NO,
+USER_ID,
+USER_NAME,
+USER_AUTH,
+USER_STAT,
+USER_NICKNAME,
+USER_EMAIL
+FROM 2020_YJ.USER_INFO
+WHERE
+USER_NICKNAME
+=#{user_nickname}
+</select>
+
+<select id="passCheck"  parameterType="String" resultType="Int">
+SELECT
+COUNT(*)
+FROM 2020_YJ.USER_INFO
+WHERE
+USER_PASSWORD
+=#{user_password}
+</select>
+
+<update id="updatepass" parameterType="LoginDTO">
+UPDATE
+2020_YJ.USER_INFO
+SET
+USER_PASSWORD
+=#{user_password}
+WHERE
+USER_NICKNAME
+=#{user_nickname}
+</update>
 
 
 </mapper>

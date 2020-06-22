@@ -52,18 +52,18 @@ String user_auth = (String) session.getAttribute("user_auth");
 
 
 
-	<link rel="stylesheet" href="/css/yyy.css">
+	<link rel="stylesheet" href="/css/yyy.css?after">
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/animate.css?after">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="/css/icomoon.css">
+	<link rel="stylesheet" href="/css/icomoon.css?after">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/bootstrap.css?after">
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/css/owl.carousel.min.css?after">
+	<link rel="stylesheet" href="/css/owl.theme.default.min.css?after">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css?after">
 	
 
 	<!-- Modernizr JS -->
@@ -172,7 +172,7 @@ var immg2 = immg.split("\\");
 				<div class="row" style="margin-top: 0;">
 					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 						<figure class="text-center" style="text-align: left;">
-							<img id="blah" src="#" alt="이미지를 등록해주세요" class="img-responsive" style="max-width:80%; margin-left:auto;margin-right:auto;max-height:600px;"/>
+							<img id="blah" src="#" alt="이미지를 등록해주세요" class="img-responsive" style="max-width:60%;max-height:500px; margin-left:auto;margin-right:auto;max-height:600px;"/>
 						</figure>
 					</div>
                     <div>

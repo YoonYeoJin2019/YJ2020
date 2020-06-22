@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+   <%@page import="poly.dto.ExplainDTO" %>
 <%
 String user_nickname = (String) session.getAttribute("user_nickname");
 String user_auth = (String) session.getAttribute("user_auth");
+ExplainDTO eDTO = (ExplainDTO) request.getAttribute("eDTO");
+String health_name = (String) request.getAttribute("health_name");
+
 %>
 
 <html>
 <head>
 <meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Nitro &mdash; Free HTML5 Bootstrap Website Template by FreeHTML5.co</title>
+<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -47,7 +49,9 @@ String user_auth = (String) session.getAttribute("user_auth");
 
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+
+
 
 
 	<link rel="stylesheet" href="/css/yyy.css?after">
@@ -71,10 +75,35 @@ String user_auth = (String) session.getAttribute("user_auth");
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+<script type="text/javascript">
+    $(function() {
+        $("#imgInp").on('change', function(){
+            readURL(this);
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+var immg = document.getElementById('imgInp').value
+var immg2 = immg.split("\\");
+
+        reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            $("#imgName").html("변경된 이미지명 : "+immg2[2]);
+            document.getElementById("img_name").value = immg2[2];
+
+          reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+
 	</head>
 	<body>
 	<div id="fh5co-page">
-	
 <%if(user_auth == null){ %>
 
 <%@include file="/WEB-INF/view/bar/user.jsp"%>
@@ -91,51 +120,61 @@ String user_auth = (String) session.getAttribute("user_auth");
 
 		<div id="fh5co-main">
 
-
-		
 			<div class="fh5co-narrow-content" style="border-bottom: 10px solid gainsboro;border-top:10px solid gainsboro;padding-top:20px;margin-top: 20px;padding-bottom: 20px;">
-                <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 비밀번호찾기 </h2>
+                <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 운동등록2 </h2>
+
+<!--폼시작-->
+<form action="index_ready_2_up_sh.do" method="post" enctype="multipart/form-data" >
+			<div class="fh5co-narrow-content" style="padding: 0;">
+				<div class="row" style="margin-top: 0;">
+					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+						<figure class="text-center" style="text-align: left;">
+							<img id="blah" src="/pose/<%=eDTO.getHealth_no()%>/to/<%=eDTO.getExplain_img()%>" alt="이미지를 등록해주세요" class="img-responsive" style="max-width:60%;max-height:500px; margin-left:auto;margin-right:auto;max-height:600px;"/>
+						</figure>
+					</div>
+                    <div>
+                        <span class="btn btn-default btn-file">
+                            이미지 변경
+                    <input type="file" id="imgInp" name="imgInp"/>
+                        </span>
+                </div>
+                <div class="creaname" id="imgName"  name="imgName">
+                  
+                </div>
+
                 
-			
+                <div class="creaname">
+                <%=health_name%> - 운동 설명
+                </div>
+                <div style="width:100%;" class="creaname">
+                <textarea class="index2textarea" rows="5" name="EXPLAIN_CONTENT" id="EXPLAIN_CONTENT"><%=eDTO.getExplain_content()%></textarea>
+                </div>
 
-				<div class="loginwindow">
-
-
-                    <img class="loginwindowimg" src="/img/logo3.png">
-
-                <form method="POST" action="/passfindsh.do">
-                    <div class="signup1">이름</div>
-                    <div class="signup1"><input type="text" class="signinput1" name="user_name"></div>
-                    <div class="signup1">이메일</div>
-                    <div class="signup1"><input type="email" class="signinput1" name="user_email"></div>
-                    <div class="signup1">아이디</div>
-                    <div class="signup1"><input type="text" class="signinput1" name="user_id"></div>
-
-                    <div class="signup2">
-                        <input type="button" class="signupsubmit2" value="취소">
-                        <input type="submit" class="signupsubmit" value="확인">
+				<input type="hidden" name="img_name" value="" id="img_name">
+				<input type="hidden" name="pose_name" value="<%=health_name%>" id="pose_name">
+				<input type="hidden" name="health_no" value="<%=eDTO.getHealth_no()%>" id="health_no">
+					<div class="index2div2">
+                        <input type="submit" class="index2submit" value="등록">
+                        <input type="button" class="index2submit" value="취소" onclick="location.href='index.do'">
                     </div>
-                </form>
 
-                 <div class="logininputwin1"><a class="loginfine1" href="loginfind.do">아이디찾기</a> | <a class="loginfine1" href="passfind.do">비밀번호찾기</a> | <a class="loginfine1" href="signup.do">회원가입</a></div>
+                    </div>
+				</div>
+</form>
+<!--폼 끝-->
 
 
+                <div>
 
                 </div>
 
+            </div>
+            
+
+        </div>>
 
 
-
-                    
-                    
-
-               
-                
-
-			</div>
-	
-
-
+		
 		</div>
 	</div>
 
@@ -157,6 +196,5 @@ String user_auth = (String) session.getAttribute("user_auth");
 	
 	<!-- MAIN JS -->
 	<script src="/js/main.js"></script>
-
 	</body>
 </html>

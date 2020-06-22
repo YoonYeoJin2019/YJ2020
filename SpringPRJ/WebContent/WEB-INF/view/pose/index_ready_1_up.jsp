@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="poly.dto.HealthDTO" %>
 <!DOCTYPE html>
 
 <%
 String user_nickname = (String) session.getAttribute("user_nickname");
 String user_auth = (String) session.getAttribute("user_auth");
-String pose_name = (String) request.getAttribute("pose_name");
-String health_no = (String) request.getAttribute("health_no");
+HealthDTO hDTO = (HealthDTO) request.getAttribute("hDTO");
+
 %>
 
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Nitro &mdash; Free HTML5 Bootstrap Website Template by FreeHTML5.co</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -75,12 +77,6 @@ String health_no = (String) request.getAttribute("health_no");
 	<![endif]-->
 
 <script type="text/javascript">
-	$(window).on("load",function(){
-		var pose_name = '<%=pose_name%>';
-		console.log(pose_name);
-		var health_no = '<%=health_no%>';
-		console.log(health_no);
-	})
     $(function() {
         $("#imgInp").on('change', function(){
             readURL(this);
@@ -105,6 +101,47 @@ var immg2 = immg.split("\\");
     }
 </script>
 
+<script type="text/javascript">
+    $(function() {
+        $("#fileInp").on('change', function(){
+            readURL2(this);
+        });
+    });
+
+    function readURL2(input) {
+        var reader = new FileReader();
+        var ffile = document.getElementById('fileInp').value
+        var ffile2 = ffile.split("\\");
+        
+
+        $("#fileNameorg").html("변경된 파일명 : "+ ffile2[2]);
+        document.getElementById("file_name").value = ffile2[2];
+
+        
+    }
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $("#fileInp2").on('change', function(){
+            readURL3(this);
+        });
+    });
+
+    function readURL3(input) {
+        var reader = new FileReader();
+        var ffile3 = document.getElementById('fileInp2').value
+        var ffile4 = ffile3.split("\\");
+        
+
+        $("#fileNameorg2").html("변경된 파일명 : "+ffile4[2]);
+        document.getElementById("file_name2").value = ffile4[2];
+    }
+</script>
+
+
+
+
 
 	</head>
 	<body>
@@ -126,47 +163,77 @@ var immg2 = immg.split("\\");
 		<div id="fh5co-main">
 
 			<div class="fh5co-narrow-content" style="border-bottom: 10px solid gainsboro;border-top:10px solid gainsboro;padding-top:20px;margin-top: 20px;padding-bottom: 20px;">
-                <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 운동등록2 </h2>
+                <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 운동등록 </h2>
 
-<!--폼시작-->
-<form action="index_ready_2_sh.do" method="post" enctype="multipart/form-data" >
+
+
+  <!--form 시작-->
+  
+  <form action="index_ready_1_up_sh.do" method="post" enctype="multipart/form-data">
+  
 			<div class="fh5co-narrow-content" style="padding: 0;">
 				<div class="row" style="margin-top: 0;">
 					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 						<figure class="text-center" style="text-align: left;">
-							<img id="blah" src="#" alt="이미지를 등록해주세요" class="img-responsive" style="max-width:60%;max-height:500px; margin-left:auto;margin-right:auto;max-height:600px;"/>
+							<img id="blah" src="/pose/<%=hDTO.getHealth_no()%>/<%=hDTO.getHealth_img()%>" class="img-responsive" style="max-width:60%;max-height:500px; margin-left:auto;margin-right:auto;max-height:600px;"/>
 						</figure>
 					</div>
                     <div>
                         <span class="btn btn-default btn-file">
-                            이미지 등록
+                            이미지 변경
                     <input type="file" id="imgInp" name="imgInp"/>
                         </span>
                 </div>
-                <div class="creaname" id="imgName"  name="imgName">
+                <div class="creaname" id="imgName" name="imgName">
                   
                 </div>
 
-                
                 <div class="creaname">
-                <%=pose_name%> - 운동 설명
+                운동이름
                 </div>
-                <div style="width:100%;" class="creaname">
-                <textarea class="index2textarea" rows="5" name="EXPLAIN_CONTENT" id="EXPLAIN_CONTENT"></textarea>
+                <div class="creaname">
+                    <input type="text" class="creanameinput" name="pose_name" value=<%=hDTO.getHealth_name() %>>
+                    <input type="hidden" name="img_name" value="" id="img_name">
+                    <input type="hidden" name="file_name" value="" id="file_name">
+                    <input type="hidden" name="file_name2" value="" id="file_name2">
+                    <input type="hidden" name="health_no" value="<%=hDTO.getHealth_no()%>" id="health_no">
                 </div>
 
-				<input type="hidden" name="img_name" value="" id="img_name">
-				<input type="hidden" name="pose_name" value="<%=pose_name%>" id="pose_name">
-				<input type="hidden" name="health_no" value="<%=health_no%>" id="health_no">
+                <div class="creaname2">
+                <span class="btn btn-default btn-file">
+                    파일변경 1
+                    <input type="file" id="fileInp" name="fileInp"/>
+        
+                </span>
+                </div>
+                <div class="creaname" id="fileNameorg"  name="fileNameorg">
+
+<!--이름 들어감--> 기존 파일명 : <%=hDTO.getHealth_file() %>
+
+                </div>
+                
+                <div class="creaname2">
+                <span class="btn btn-default btn-file">
+                    파일변경 2
+                    <input type="file" id="fileInp2" name="fileInp2">
+                </span>
+                </div>
+                <div class="creaname" id="fileNameorg2" name="fileNameorg2">
+                    
+                    기존 파일명 : <%=hDTO.getHealth_file2() %>
+
+                </div>
+
 					<div class="index2div2">
-                        <input type="submit" class="index2submit" value="등록">
-                        <input type="button" class="index2submit" value="취소" onclick="location.href='index.do'">
+						<input type="submit" class="index2submit" value="다음">
                     </div>
 
                     </div>
 				</div>
 </form>
-<!--폼 끝-->
+     <!--form 끝-->
+
+
 
 
                 <div>
@@ -176,7 +243,7 @@ var immg2 = immg.split("\\");
             </div>
             
 
-        </div>>
+        </div>
 
 
 		
@@ -201,5 +268,6 @@ var immg2 = immg.split("\\");
 	
 	<!-- MAIN JS -->
 	<script src="/js/main.js"></script>
-	</body>
+
+</body>
 </html>

@@ -50,18 +50,18 @@ String user_auth = (String) session.getAttribute("user_auth");
 	
 
 
-	<link rel="stylesheet" href="/css/yyy.css">
+	<link rel="stylesheet" href="/css/yyy.css?after">
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/animate.css?after">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="/css/icomoon.css">
+	<link rel="stylesheet" href="/css/icomoon.css?after">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/bootstrap.css?after">
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/css/owl.carousel.min.css?after">
+	<link rel="stylesheet" href="/css/owl.theme.default.min.css?after">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css?after">
 	
 
 	<!-- Modernizr JS -->

@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="poly.dto.LoginDTO" %>
 <!DOCTYPE html>
 
 <%
 String user_nickname = (String) session.getAttribute("user_nickname");
 String user_auth = (String) session.getAttribute("user_auth");
+LoginDTO lDTO = (LoginDTO) request.getAttribute("lDTO");
+
 %>
 
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Nitro &mdash; Free HTML5 Bootstrap Website Template by FreeHTML5.co</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,33 +98,28 @@ String user_auth = (String) session.getAttribute("user_auth");
 
 		
 			<div class="fh5co-narrow-content" style="border-bottom: 10px solid gainsboro;border-top:10px solid gainsboro;padding-top:20px;margin-top: 20px;padding-bottom: 20px;">
-                <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 비밀번호찾기 </h2>
+                <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft"> 나의 정보 </h2>
                 
-			
+		
 
 				<div class="loginwindow">
 
-
-                    <img class="loginwindowimg" src="/img/logo3.png">
-
-                <form method="POST" action="/passfindsh.do">
-                    <div class="signup1">이름</div>
-                    <div class="signup1"><input type="text" class="signinput1" name="user_name"></div>
-                    <div class="signup1">이메일</div>
-                    <div class="signup1"><input type="email" class="signinput1" name="user_email"></div>
-                    <div class="signup1">아이디</div>
-                    <div class="signup1"><input type="text" class="signinput1" name="user_id"></div>
-
+                <form>
+                    <div class="setting1">아이디</div>
+                    <div class="signup1"><div class="setting_div_in"><%=lDTO.getUser_id() %></div></div>
+                    <div class="setting1">닉네임</div>
+                    <div class="signup1"><div class="setting_div_in"><%=lDTO.getUser_nickname()%></div></div>
+                    <div class="setting1">이름</div>
+                    <div class="signup1"><div class="setting_div_in"><%=lDTO.getUser_name() %></div></div>
+                    <div class="setting1">이메일</div>
+                    <div class="signup1"><div class="setting_div_in"><%=lDTO.getUser_email()%></div></div>
+                  
                     <div class="signup2">
-                        <input type="button" class="signupsubmit2" value="취소">
-                        <input type="submit" class="signupsubmit" value="확인">
+						<input type="button" class="settingsubmit2" value="비밀번호수정" onclick="location.href='/setting2.do'">
+                        <input type="button" class="settingsubmit" value="회원탈퇴">
                     </div>
+                    
                 </form>
-
-                 <div class="logininputwin1"><a class="loginfine1" href="loginfind.do">아이디찾기</a> | <a class="loginfine1" href="passfind.do">비밀번호찾기</a> | <a class="loginfine1" href="signup.do">회원가입</a></div>
-
-
-
                 </div>
 
 

@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="poly.dto.HealthDTO" %>
+    <%@ page import="java.util.List"%>    
+    <%@ page import="java.util.ArrayList"%>
+    
 <!DOCTYPE html>
 
 <%
 String user_nickname = (String) session.getAttribute("user_nickname");
 String user_auth = (String) session.getAttribute("user_auth");
+
+List<HealthDTO> hList = (List<HealthDTO>) request.getAttribute("hList");
+
 %>
 
 <html>
@@ -49,18 +56,18 @@ String user_auth = (String) session.getAttribute("user_auth");
 	
 
 
-	<link rel="stylesheet" href="/css/yyy.css">
+	<link rel="stylesheet" href="/css/yyy.css?after">
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/animate.css?after">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="/css/icomoon.css">
+	<link rel="stylesheet" href="/css/icomoon.css?after">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/bootstrap.css?after">
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/css/owl.carousel.min.css?after">
+	<link rel="stylesheet" href="/css/owl.theme.default.min.css?after">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css?after">
 	
 
 	<!-- Modernizr JS -->
@@ -244,32 +251,23 @@ String user_auth = (String) session.getAttribute("user_auth");
 				</div>
 				
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
+				
+				  <!--for 시작-->
+				  
+				<% if(hList!=null){%>  
+				<%for(HealthDTO hDTO : hList){%>
+				
 					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<a href="index_ready.do">
-							<img src="/img/squat.jpg" class="img-responsive" style="width: 100%;height:330px;">
-							<h3 class="fh5co-work-title">Squat</h3>
+						<a href="index_ready.do?Health_no=<%=hDTO.getHealth_no()%>&Health_name=<%=hDTO.getHealth_name()%>">
+							<img src="/pose/<%=hDTO.getHealth_no()%>/<%=hDTO.getHealth_img()%>" class="img-responsive" style="width: 100%;height:330px;">
+							<h3 class="fh5co-work-title"><%=hDTO.getHealth_name()%></h3>
 							
 						</a>
 					</div>
-					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<a href="index_ready.do">
-							<img src="/img/jump.jpg" class="img-responsive" style="width: 100%;height:330px;">
-							<h3 class="fh5co-work-title">Jumping jacks</h3>
-							
-						</a>
-					</div>
-					<div class="clearfix visible-sm-block"></div>
-					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<a href="index_ready.do">
-							<img src="/img/push.jpg" class="img-responsive" style="width: 100%;height:330px;">
-							<h3 class="fh5co-work-title">Push Up</h3>
-							
-						</a>
-					</div>
+				<%} %>
+<%} %>
 
-
-
-					
+				<!--for 끝-->	
 				</div>
 			</div>
 			

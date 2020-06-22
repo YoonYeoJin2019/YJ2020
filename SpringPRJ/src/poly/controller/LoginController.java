@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.LoginDTO;
 import poly.dto.MailDTO;
@@ -144,6 +146,8 @@ public class LoginController {
 	return "/login/signup";
 	}
 	
+	
+	//회원가입 실행
 	@RequestMapping(value="signupsh")
 	public String Signupsh(HttpServletRequest request,HttpServletResponse response,Model model) {
 	
@@ -209,7 +213,7 @@ public class LoginController {
 	
 	return "/login/loginfind";
 	}
-	
+	// 아이디 찾기 실행
 	@RequestMapping(value="loginfindsh")
 	public String Loginfindsh(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception {
 		
@@ -245,7 +249,7 @@ public class LoginController {
 		
 	return "redirect";
 	}
-	
+	//비밀번호 찾기 실행
 	@RequestMapping(value="passfindsh")
 	public String Passfindsh(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception {
 	
@@ -329,7 +333,125 @@ public class LoginController {
 	return "redirect";
 	}
 	
+	@RequestMapping(value = "setting")
+	public String Setting(HttpServletRequest request,HttpServletResponse response,Model model,HttpSession session) throws Exception{
+		
+		String user_nickname = (String) session.getAttribute("user_nickname");
+		
+		if(user_nickname==null) {
+			
+			model.addAttribute("msg", "접근 권한이 없습니다.");
+			model.addAttribute("url", "/index.do");
+			
+			return "redirect";
+			
+		}
+		
+		
+		log.info(user_nickname+"이게 닉네임인가???");
+		
+		LoginDTO lDTO = new LoginDTO();
+		
+		try {
+			
+		lDTO = loginservice.getuserinfo(user_nickname);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		String um = EncryptUtil.decAES128CBC(lDTO.getUser_email());
+		lDTO.setUser_email(um);
+		
+		log.info(lDTO.getUser_email()+"이메일---------");
+		log.info(lDTO.getUser_id()+"아이디");
+		log.info(lDTO.getUser_name()+"네임");
+		log.info(lDTO.getUser_nickname()+"닉네임 -----------");
+		
+		
+		
+		model.addAttribute("lDTO", lDTO);
+		
+		
+		lDTO = null;
+		return "/login/setting";
+	}
 	
+	@RequestMapping(value = "setting2")
+	public String Setting2(HttpServletRequest request,HttpServletResponse response,Model model,HttpSession session) {
+		
+		String user_nickname = (String) session.getAttribute("user_nickname");
+		
+		if(user_nickname==null) {
+			
+			model.addAttribute("msg", "접근 권한이 없습니다.");
+			model.addAttribute("url", "/index.do");
+			
+			return "redirect";
+			
+		}	
+		return "/login/setting2";
+	}
+	
+	
+	@RequestMapping(value = "setting2_sh")
+	public String Setting2_sh(HttpServletRequest request,HttpServletResponse response,Model model,HttpSession session)throws Exception {
+		
+		String user_nickname = (String) session.getAttribute("user_nickname");	
+		if(user_nickname==null) {
+			model.addAttribute("msg", "접근 권한이 없습니다.");
+			model.addAttribute("url", "/index.do");
+			return "redirect";	
+		}
+		String user_password = CmmUtil.nvl(request.getParameter("newpass"));
+		
+		LoginDTO lDTO = new LoginDTO();
+		
+		String user_password2 = EncryptUtil.encHashSHA256(user_password);
+		
+		lDTO.setUser_nickname(user_nickname);
+		lDTO.setUser_password(user_password2);	
+		
+		
+		int res = 0;
+		
+		try {
+		
+			res = loginservice.updatepass(lDTO);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(res>0) {
+			model.addAttribute("msg", "비밀번호가 변경되었습니다.");
+			model.addAttribute("url", "/setting.do");
+		}else {
+			model.addAttribute("msg", "비밀번호가 변경에 실패하였습니다..");
+			model.addAttribute("url", "/setting.do");
+		}
+	
+		
+		return "redirect";
+	}
+	
+	
+	@RequestMapping(value = "passCheck.do", method = RequestMethod.POST)
+	public @ResponseBody int passCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String user_password = CmmUtil.nvl(request.getParameter("orgpass"));
+		log.info("user_password : " + user_password);
+		int count = 0;
+	
+		String user_password2 = EncryptUtil.encHashSHA256(user_password);
+
+		count = loginservice.passCheck(user_password2);
+		
+		if (count > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 	
 	
 }

@@ -1,5 +1,7 @@
 package poly.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -65,26 +67,19 @@ public class MongoTestService implements IMongoTestService{
 
 
 	@Override
-	public int selecthealth1() throws Exception {
+	public HealthDTO selecthealth1() throws Exception {
 		// TODO Auto-generated method stub
-		int res = 0;
-		String colNm = "HEALTH_INFO";
-		res = mongoTestMapper.selecthealth1(colNm);
-		
-		
-		return res;
-	}
 
+		String colNm = "HEALTH_INFO";	
+		return mongoTestMapper.selecthealth1(colNm);
+	}
 
 	@Override
-	public int selecthealth2() throws Exception {
-		int res = 0;
-		String colNm = "EXPLAIN_INFO";
-		res = mongoTestMapper.selecthealth2(colNm);
-		
-	
-		return res;
+	public ExplainDTO selecthealth2() throws Exception {
+		// TODO Auto-generated method stub
+		return mongoTestMapper.selecthealth2();
 	}
+
 
 	@Override
 	public int inserthealth2(ExplainDTO eDTO) throws Exception {
@@ -104,6 +99,51 @@ public class MongoTestService implements IMongoTestService{
 		// TODO Auto-generated method stub
 		return mongoTestMapper.selecthealth3(pose_name);
 	}
+
+
+	@Override
+	public List<HealthDTO> getindexlist() throws Exception {
+		// TODO Auto-generated method stub
+		return mongoTestMapper.getindexlist();
+	}
+
+
+	@Override
+	public ExplainDTO getready(String health_no) throws Exception {
+		// TODO Auto-generated method stub
+		return mongoTestMapper.getready(health_no);
+	}
+
+
+	@Override
+	public int ready_del(String health_no) throws Exception {
+		// TODO Auto-generated method stub
+		return mongoTestMapper.ready_del(health_no);
+	}
+
+
+	@Override
+	public HealthDTO getready_1_up(String health_no) throws Exception {
+		// TODO Auto-generated method stub
+		return mongoTestMapper.getready_1_up(health_no);
+	}
+
+
+	@Override
+	public int update_ready_1_up_sh(HealthDTO hDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return mongoTestMapper.update_ready_1_up_sh(hDTO);
+	}
+
+
+	@Override
+	public int ready_2_up_sh(ExplainDTO eDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return mongoTestMapper.ready_2_up_sh(eDTO);
+	}
+
+
+
 	
 	
 	
