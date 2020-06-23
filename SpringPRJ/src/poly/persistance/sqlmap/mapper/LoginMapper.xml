@@ -114,5 +114,78 @@ USER_NICKNAME
 =#{user_nickname}
 </update>
 
+<select id="cntpage2" resultType="int">
+SELECT
+COUNT(*)
+FROM
+2020_YJ.USER_INFO
+<trim prefix="WHERE" prefixOverrides="AND|OR">
+<if test="keyword != null and keyword != '' ">
+			<if test="searchType=='user_id'">
+				AND USER_ID LIKE CONCAT('%',#{keyword},'%')			
+			</if>
+			<if test="searchType=='user_name'">
+				AND USER_NAME LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType=='user_nickname'">
+				AND USER_NICKNAME LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType=='user_auth'">
+				AND USER_AUTH =#{keyword}
+			</if>
+			<if test="searchType=='user_stat'">
+				AND USER_STAT =#{keyword}
+			</if>
+</if>
+
+</trim>
+</select>
+
+<select id="getuserinfo2" resultType="Search">
+SELECT
+USER_NO,
+USER_ID,
+USER_NICKNAME,
+USER_NAME,
+USER_STAT,
+USER_AUTH
+FROM 2020_YJ.USER_INFO
+<trim prefix="WHERE" prefixOverrides="AND|OR">
+<if test="keyword != null and keyword != '' ">
+
+			<if test="searchType=='user_id'">
+				AND USER_ID LIKE CONCAT('%',#{keyword},'%')			
+			</if>
+			<if test="searchType=='user_name'">
+				AND USER_NAME LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType=='user_nickname'">
+				AND USER_NICKNAME LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType=='user_auth'">
+				AND USER_AUTH =#{keyword}
+			</if>
+			<if test="searchType=='user_stat'">
+				AND USER_STAT =#{keyword}
+			</if>
+</if>
+</trim>
+LIMIT #{iNum1},#{iNum2}
+</select>
+
+<select id="getuserinfo3"  parameterType="LoginDTO" resultType="LoginDTO">
+SELECT
+USER_NO,
+USER_ID,
+USER_NAME,
+USER_AUTH,
+USER_STAT,
+USER_NICKNAME,
+USER_EMAIL
+FROM 2020_YJ.USER_INFO
+WHERE
+USER_NO
+=#{user_no}
+</select>
 
 </mapper>

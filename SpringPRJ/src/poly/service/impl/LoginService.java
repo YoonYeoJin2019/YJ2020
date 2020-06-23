@@ -1,11 +1,14 @@
 package poly.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import poly.dto.LoginDTO;
+import poly.dto.Search;
 import poly.persistance.mapper.ILoginMapper;
 import poly.service.ILoginService;
 import poly.util.EncryptUtil;
@@ -78,6 +81,24 @@ public class LoginService implements ILoginService {
 	public int updatepass(LoginDTO lDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return loginmapper.updatepass(lDTO);
+	}
+
+	@Override
+	public int cntpage2(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.cntpage2(search);
+	}
+
+	@Override
+	public List<LoginDTO> getuserinfo2(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.getuserinfo2(search);
+	}
+
+	@Override
+	public LoginDTO getuserinfo3(String user_no) throws Exception {
+		// TODO Auto-generated method stub
+		return loginmapper.getuserinfo3(user_no);
 	}
 	
 	

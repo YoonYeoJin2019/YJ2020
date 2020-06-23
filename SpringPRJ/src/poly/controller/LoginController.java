@@ -1,5 +1,8 @@
 package poly.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.LoginDTO;
 import poly.dto.MailDTO;
+import poly.dto.Search;
 import poly.service.ILoginService;
 import poly.service.IMailService;
 import poly.service.IMongoTestService;
@@ -433,6 +438,322 @@ public class LoginController {
 	
 		
 		return "redirect";
+	}
+	
+	@RequestMapping(value="managerment")
+	public String Managerment(HttpServletRequest request,Model model,HttpSession session,
+			@RequestParam(required = false, defaultValue = "user_id") String searchType,
+			@RequestParam(required = false) String keyword) throws Exception{
+		
+
+		
+		int pageNum;
+		String pgNum = request.getParameter("pgNum");
+		
+			
+		if(pgNum==null) {
+		pageNum=0;
+		}else {
+		pageNum = Integer.parseInt(pgNum);
+		}
+		
+		int iNum1 = pageNum * 10;
+		int iNum2 = 10;
+		
+		Search search = new Search();
+	
+		if("user_auth".equals(searchType)) {
+			if("회원".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "0";
+				search.setKeyword(keyword);
+			}else if("관리자".equals(keyword)){
+				search.setSearchType(searchType);
+				keyword = "1";
+				search.setKeyword(keyword);
+			}else {
+				search.setSearchType(searchType);
+				search.setKeyword(keyword);
+			}
+		}if("user_stat".equals(searchType)) {
+			if("정상".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "0";
+				search.setKeyword(keyword);
+			}else if("정지".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "1";
+				search.setKeyword(keyword);
+			}else {
+				search.setSearchType(searchType);
+				search.setKeyword(keyword);
+			}
+		}else {
+			search.setSearchType(searchType);
+			search.setKeyword(keyword);
+		}
+	
+		log.info(searchType);
+		log.info(keyword);
+		
+		int cnt = 0;
+		
+		List<LoginDTO> lList = new ArrayList<LoginDTO>();
+		
+		try {
+			
+			cnt = loginservice.cntpage2(search);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		cnt =((cnt-1)/10)+1;
+		
+		log.info(cnt);
+		
+		search.setiNum1(iNum1);
+		search.setiNum2(iNum2);
+		
+		try {
+		
+			lList = loginservice.getuserinfo2(search);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		model.addAttribute("lList", lList);
+		model.addAttribute("pgNum", pageNum);
+		model.addAttribute("cnt", cnt);
+		
+		
+	return "/login/managerment";
+	
+	}
+	
+	@RequestMapping(value="managerment_1")
+	public String Managerment_1(HttpServletRequest request,Model model,HttpSession session,
+			@RequestParam(required = false, defaultValue = "user_id") String searchType,
+			@RequestParam(required = false) String keyword) throws Exception{
+		
+
+		
+		String pgNum = request.getParameter("pgNum");
+		int pageNum = Integer.parseInt(pgNum);
+		
+		
+		if(pageNum<0) {
+			model.addAttribute("msg", "첫번째 페이지입니다.");
+			model.addAttribute("url", "managerment.do");		
+		return "redirect";
+		}
+		
+		int iNum1 = pageNum * 10;
+		int iNum2 = 10;
+		
+		Search search = new Search();
+	
+		if("user_auth".equals(searchType)) {
+			if("회원".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "0";
+				search.setKeyword(keyword);
+			}else if("관리자".equals(keyword)){
+				search.setSearchType(searchType);
+				keyword = "1";
+				search.setKeyword(keyword);
+			}else {
+				search.setSearchType(searchType);
+				search.setKeyword(keyword);
+			}
+		}if("user_stat".equals(searchType)) {
+			if("정상".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "0";
+				search.setKeyword(keyword);
+			}else if("정지".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "1";
+				search.setKeyword(keyword);
+			}else {
+				search.setSearchType(searchType);
+				search.setKeyword(keyword);
+			}
+		}else {
+			search.setSearchType(searchType);
+			search.setKeyword(keyword);
+		}
+	
+		log.info(searchType);
+		log.info(keyword);
+		
+		int cnt = 0;
+		
+		List<LoginDTO> lList = new ArrayList<LoginDTO>();
+		
+		try {
+			
+			cnt = loginservice.cntpage2(search);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		cnt =((cnt-1)/10)+1;
+		
+		log.info(cnt);
+		
+		search.setiNum1(iNum1);
+		search.setiNum2(iNum2);
+		
+		try {
+		
+			lList = loginservice.getuserinfo2(search);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		model.addAttribute("lList", lList);
+		model.addAttribute("pgNum", pageNum);
+		model.addAttribute("cnt", cnt);
+		
+		
+	return "/login/managerment";
+	
+	}
+	
+	@RequestMapping(value="managerment_2")
+	public String Managerment_2(HttpServletRequest request,Model model,HttpSession session,
+			@RequestParam(required = false, defaultValue = "user_id") String searchType,
+			@RequestParam(required = false) String keyword) throws Exception{
+		
+
+		
+		int pageNum;
+		String pgNum = request.getParameter("pgNum");
+		
+			
+		if(pgNum==null) {
+		pageNum=0;
+		}else {
+		pageNum = Integer.parseInt(pgNum);
+		}
+		
+		int iNum1 = pageNum * 10;
+		int iNum2 = 10;
+		
+		Search search = new Search();
+	
+		if("user_auth".equals(searchType)) {
+			if("회원".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "0";
+				search.setKeyword(keyword);
+			}else if("관리자".equals(keyword)){
+				search.setSearchType(searchType);
+				keyword = "1";
+				search.setKeyword(keyword);
+			}else {
+				search.setSearchType(searchType);
+				search.setKeyword(keyword);
+			}
+		}if("user_stat".equals(searchType)) {
+			if("정상".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "0";
+				search.setKeyword(keyword);
+			}else if("정지".equals(keyword)) {
+				search.setSearchType(searchType);
+				keyword = "1";
+				search.setKeyword(keyword);
+			}else {
+				search.setSearchType(searchType);
+				search.setKeyword(keyword);
+			}
+		}else {
+			search.setSearchType(searchType);
+			search.setKeyword(keyword);
+		}
+	
+		log.info(searchType);
+		log.info(keyword);
+		
+		int cnt = 0;
+		
+		List<LoginDTO> lList = new ArrayList<LoginDTO>();
+		
+		try {
+			
+			cnt = loginservice.cntpage2(search);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		cnt =((cnt-1)/10)+1;
+		
+		
+		if(pageNum==cnt) {
+			model.addAttribute("msg", "마지막 페이지입니다.");
+			model.addAttribute("url", "managerment.do");		
+		return "redirect";
+		}
+		
+		log.info(cnt);
+		
+		search.setiNum1(iNum1);
+		search.setiNum2(iNum2);
+		
+		try {
+		
+			lList = loginservice.getuserinfo2(search);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		model.addAttribute("lList", lList);
+		model.addAttribute("pgNum", pageNum);
+		model.addAttribute("cnt", cnt);
+		
+		
+	return "/login/managerment";
+	
+	}
+	
+	@RequestMapping(value="managerment2")
+	public String Managerment2(HttpServletRequest request,HttpServletResponse response,Model model,HttpSession session)throws Exception {
+		
+		String user_no = CmmUtil.nvl("user_no");
+		
+		LoginDTO lDTO = new LoginDTO();
+		
+		lDTO.setUser_no(user_no);
+		
+		try {
+			
+			lDTO = loginservice.getuserinfo3(user_no);
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		String user_email = EncryptUtil.decAES128CBC(lDTO.getUser_email());
+		lDTO.setUser_email(user_email);
+		
+		model.addAttribute("lDTO",lDTO);
+		
+		
+		return "/login/managerment2";
 	}
 	
 	

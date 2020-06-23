@@ -1,7 +1,10 @@
 package poly.persistance.mapper;
 
+import java.util.List;
+
 import config.Mapper;
 import poly.dto.LoginDTO;
+import poly.dto.Search;
 
 @Mapper("ILoginMapper")
 public interface ILoginMapper {
@@ -22,7 +25,12 @@ public interface ILoginMapper {
 
 	int updatepass(LoginDTO lDTO)throws Exception;
 
+	int cntpage2(Search search)throws Exception;
+
+	List<LoginDTO> getuserinfo2(Search search)throws Exception;
+
+	LoginDTO getuserinfo3(String user_no)throws Exception;
+
 	
-	
-	
+
 }

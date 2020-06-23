@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import poly.dto.ExplainDTO;
 import poly.dto.HealthDTO;
+import poly.dto.LoginDTO;
 import poly.service.IMongoTestService;
 import poly.util.CmmUtil;
 
@@ -577,6 +578,10 @@ public class PoseController {
 		
 		return "redirect";
 	}
+	
+
+	
+	
 	// 운동 수정2 페이지 실행
 	@RequestMapping(value="index_ready_2_up_sh")
 	public String Index_ready_2_up_sh(HttpServletRequest request, HttpServletResponse response,Model model) {
@@ -698,6 +703,11 @@ public class PoseController {
 		
 		return "redirect";
 	}
+	
+	
+
+	
+	
 	
 	
 public static void deleteFolder(String path) {

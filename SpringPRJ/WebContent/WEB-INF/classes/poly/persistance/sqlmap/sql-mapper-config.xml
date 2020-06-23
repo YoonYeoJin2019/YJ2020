@@ -7,6 +7,6 @@
 		<typeAlias type="poly.dto.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="poly.dto.MovieDTO" alias="MovieDTO"/>
 		<typeAlias type="poly.dto.LoginDTO" alias="LoginDTO"/>
-		
+		<typeAlias type="poly.dto.Search" alias="Search"/>
     </typeAliases>
 </configuration>
